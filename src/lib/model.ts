@@ -1,10 +1,5 @@
-export const exercises = [
-  {id:'bench',name:'Press de banca',group:'Pecho'}, {id:'incline',name:'Press inclinado',group:'Pecho'}, {id:'fly',name:'Aperturas con mancuernas',group:'Pecho'},
-  {id:'squat',name:'Sentadilla',group:'Piernas'}, {id:'legpress',name:'Prensa de piernas',group:'Piernas'}, {id:'lunge',name:'Zancadas',group:'Piernas'}, {id:'legcurl',name:'Curl femoral',group:'Piernas'}, {id:'calf',name:'Elevación de talones',group:'Piernas'},
-  {id:'deadlift',name:'Peso muerto',group:'Espalda'}, {id:'row',name:'Remo con barra',group:'Espalda'}, {id:'pulldown',name:'Jalón al pecho',group:'Espalda'}, {id:'pullup',name:'Dominadas',group:'Espalda'},
-  {id:'shoulder',name:'Press de hombros',group:'Hombros'}, {id:'lateral',name:'Elevaciones laterales',group:'Hombros'},
-  {id:'curl',name:'Curl de bíceps',group:'Brazos'}, {id:'triceps',name:'Extensión de tríceps',group:'Brazos'}, {id:'pushup',name:'Flexiones',group:'Pecho'}, {id:'crunch',name:'Abdominales',group:'Core'},
-];
+import {exercises} from './exercises';
+export {exercises} from './exercises';
 export type SetEntry = {reps:number;kg:number};
 export type Workout = {date:string;exerciseId:string;sets:SetEntry[];notes:string};
 export type GymEvent = {id:string;user_id:string;kind:'workout'|'delete';target_id:string|null;payload:Workout|null;created_at:string};

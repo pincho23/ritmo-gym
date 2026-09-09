@@ -4,7 +4,7 @@ Diario de entrenamiento en español para iOS, Android y web, construido con Expo
 
 ## Funciones
 
-- Registro de fecha, ejercicio de un catálogo de 18 opciones, series, repeticiones, kg y notas.
+- Registro de fecha, ejercicio de un catálogo de 61 opciones, series, repeticiones, kg y notas.
 - Volumen = suma de kg × repeticiones de cada serie. Los ejercicios con 0 kg cuentan series/repeticiones, pero no volumen externo. No estima calorías ni trabajo mecánico.
 - Dashboard de volumen por día, ejercicios con más volumen, carga máxima por ejercicio y contadores.
 - Historial y filtros por ejercicio, últimos 7/30/90 días, todo o fechas inclusivas.
@@ -30,7 +30,7 @@ El servidor de desarrollo no prueba el modo PWA sin conexión: servir `dist` por
 ## Conectar un Supabase independiente
 
 1. Crear un proyecto Supabase. Si la cuenta alcanzó su cupo de proyectos gratuitos, liberar uno o elegir conscientemente un plan antes de continuar.
-2. Ejecutar `supabase/migrations/001_gym.sql` en SQL Editor del nuevo proyecto. La migración crea únicamente objetos `gym_*` y políticas por usuario. Ejecutarla una sola vez.
+2. Ejecutar, en orden, `supabase/migrations/001_gym.sql` y `supabase/migrations/002_expand_exercises.sql` en SQL Editor del nuevo proyecto. La migración crea únicamente objetos `gym_*` y políticas por usuario. Ejecutarla una sola vez.
 3. Copiar `.env.example` a `.env`; añadir la URL y la clave pública anon/publishable de ese proyecto. Nunca usar `service_role` en la app.
 4. En Authentication, habilitar email/contraseña y configurar Site URL con la URL final HTTPS. El despliegue actual permite registro con contraseña sin confirmar email, por decisión del propietario. Activar confirmación requiere configurar SMTP para enviar a personas ajenas a la organización. Tras confirmar en el navegador se puede volver a la app nativa e iniciar sesión con contraseña.
 5. Reiniciar Expo y reconstruir la web. Las variables `EXPO_PUBLIC_*` forman parte del paquete público y no son secretos.

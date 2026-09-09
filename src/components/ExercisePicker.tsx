@@ -12,7 +12,7 @@ export function ExercisePicker({value, onChange, allowAll = false}: {
   const [search, setSearch] = useState('');
   const name = exercises.find(e => e.id === value)?.name || (allowAll ? 'Todos los ejercicios' : 'Elegir ejercicio');
   const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const options = exercises.filter(e => normalize(e.name + ' ' + e.group).includes(normalize(search)));
+  const options = exercises.filter(e => normalize(e.name + ' ' + e.group + ' ' + (e.detail || '')).includes(normalize(search)));
   const select = (id: string) => { onChange(id); setOpen(false); };
 
   return <>
@@ -42,7 +42,7 @@ export function ExercisePicker({value, onChange, allowAll = false}: {
               style={{paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: C.edge}}
             >
               <Text style={s.text}>{e.name}</Text>
-              <Text style={s.muted}>{e.group}</Text>
+              <Text style={s.muted}>{e.group}{e.detail ? ` · ${e.detail}` : ''}</Text>
             </Pressable>)}
             {!options.length && <Text style={s.muted}>No hay ejercicios con ese nombre.</Text>}
           </ScrollView>

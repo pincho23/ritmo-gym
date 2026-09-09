@@ -15,3 +15,15 @@ test('new writes during synchronization remain queued',async()=>{const store=new
 test('tombstone wins regardless of receive order; no resurrection',()=>{const deletion:GymEvent={...event('2'),kind:'delete',target_id:'1',payload:null};assert.equal(records([deletion,event('1')]).length,0);assert.equal(records([event('1'),deletion]).length,0)});
 test('filters use inclusive dates and exercise, sessions count distinct days',()=>{const all=records([event('1'),event('2')]);assert.equal(stats(all).sessions,1);assert.equal(filterRecords(all,'bench','2026-01-01','2026-01-01').length,2);assert.equal(filterRecords(all,'squat','','').length,0)});
 test('storage failure is surfaced, never reported as saved',async()=>{const store=new GymStore({getItem:async()=>null,setItem:async()=>{throw Error('quota')}},'alice');await assert.rejects(store.append(event('1')))});
+
+test('every catalog variant is accepted by the matching database migration', async()=>{
+ const {exercises}=await import('../src/lib/exercises.ts');
+ const {readFileSync}=await import('node:fs');
+ const migration=readFileSync(new URL('../supabase/migrations/002_expand_exercises.sql',import.meta.url),'utf8');
+ const list=migration.match(/not in \(([^\n]+)\) then/)![1]!;
+ const serverIds=[...list.matchAll(/'([^']+)'/g)].map(m=>m[1]);
+ assert.equal(new Set(exercises.map(e=>e.id)).size,exercises.length);
+ assert.deepEqual(serverIds.sort(),exercises.map(e=>e.id).sort());
+ for(const e of exercises)validateWorkout({...workout,exerciseId:e.id});
+ for(const legacy of ['bench','incline','fly','squat','legpress','lunge','legcurl','calf','deadlift','row','pulldown','pullup','shoulder','lateral','curl','triceps','pushup','crunch'])assert.ok(exercises.some(e=>e.id===legacy));
+});
