@@ -32,7 +32,7 @@ El servidor de desarrollo no prueba el modo PWA sin conexión: servir `dist` por
 1. Crear un proyecto Supabase. Si la cuenta alcanzó su cupo de proyectos gratuitos, liberar uno o elegir conscientemente un plan antes de continuar.
 2. Ejecutar `supabase/migrations/001_gym.sql` en SQL Editor del nuevo proyecto. La migración crea únicamente objetos `gym_*` y políticas por usuario. Ejecutarla una sola vez.
 3. Copiar `.env.example` a `.env`; añadir la URL y la clave pública anon/publishable de ese proyecto. Nunca usar `service_role` en la app.
-4. En Authentication, habilitar email/contraseña y configurar Site URL con la URL final HTTPS. Mantener confirmación de correo según las necesidades del proyecto. Tras confirmar en el navegador se puede volver a la app nativa e iniciar sesión con contraseña.
+4. En Authentication, habilitar email/contraseña y configurar Site URL con la URL final HTTPS. El despliegue actual permite registro con contraseña sin confirmar email, por decisión del propietario. Activar confirmación requiere configurar SMTP para enviar a personas ajenas a la organización. Tras confirmar en el navegador se puede volver a la app nativa e iniciar sesión con contraseña.
 5. Reiniciar Expo y reconstruir la web. Las variables `EXPO_PUBLIC_*` forman parte del paquete público y no son secretos.
 6. Validar con dos cuentas reales: una nunca debe poder consultar eventos de la otra. Ver `supabase/verify-rls.sql`.
 

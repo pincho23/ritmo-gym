@@ -6,6 +6,7 @@
 - Pruebas locales: 9 casos automatizados aprobados. Exportaciones de Expo para web, iOS y Android correctas; no equivalen a binarios nativos firmados.
 - PWA: comprobado arranque y lectura del registro local con el servidor HTTP detenido.
 - Configuración pública Supabase guardada en `.env`, excluida de Git. No hay claves de servicio en la app.
-- Publicación prevista: https://pincho23.github.io/ritmo-gym/
+- Publicación activa: https://pincho23.github.io/ritmo-gym/
 - La primera creación de cuenta e inicio de sesión requieren conexión. Con una sesión guardada, los entrenamientos se conservan offline. Sincroniza con la app abierta o al volver a abrirla.
-- Pendiente de prueba por el propietario: crear/confirmar su cuenta, entrar en dos dispositivos y comprobar sincronización con un entrenamiento real.
+- Registro abierto con correo y contraseña, sin confirmación de email por elección del propietario.
+- Pendiente de prueba por el propietario: crear su cuenta, entrar en dos dispositivos y comprobar sincronización con un entrenamiento real.
