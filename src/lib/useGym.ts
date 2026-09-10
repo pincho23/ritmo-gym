@@ -26,5 +26,5 @@ export function useGym(owner:string,localOnly:boolean){
  const online=()=>void sync();if(Platform.OS==='web')window.addEventListener('online',online);
  return()=>{live.current=false;clearInterval(timer);app.remove();if(Platform.OS==='web')window.removeEventListener('online',online);};},[store,sync]);
  const append=async(kind:GymEvent['kind'],payload:Workout|null,target_id:string|null)=>{const event:GymEvent={id:uuid(),user_id:owner,kind,payload,target_id,created_at:new Date().toISOString()};const next=await store.append(event);setState(next);void sync();};
- return {all:records(state.events),pending:localOnly?0:state.pending.length,ready,error,syncStatus,sync,save:async(w:Workout)=>{validateWorkout(w);await append('workout',w,null);},remove:async(id:string)=>append('delete',null,id)};
+ return {all:records(state.events),pending:localOnly?0:state.pending.length,ready,error,syncStatus,sync,save:async(w:Workout)=>{validateWorkout(w);await append('workout',w,null);},update:async(id:string,w:Workout)=>{validateWorkout(w);await append('workout',w,null);await append('delete',null,id);},remove:async(id:string)=>append('delete',null,id)};
 }
